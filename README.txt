@@ -22,3 +22,6 @@ Few important briefings about the implementation
 6. Find-bugs check have been integrated into the project. If find-bugs report high priority bugs then this will result in build failure
 
 7. External dependencies are the use of project lombok's @Data annotations for code readability sake
+
+
+Please go through the implementation and let me know of any bugs/changes to be made in the design and implementation
