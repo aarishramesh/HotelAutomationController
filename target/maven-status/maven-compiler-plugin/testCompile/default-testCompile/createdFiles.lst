@@ -1,0 +1,7 @@
+com/hotel/automation/util/CustomByteArrayInputStream.class
+com/hotel/automation/util/InputParserTest.class
+com/hotel/automation/controller/PowerControllerTest.class
+com/hotel/automation/controller/PowerControllerHelperTest.class
+com/hotel/automation/util/RegexUtilsTest.class
+com/hotel/automation/controller/SensorControllerTest.class
+com/hotel/automation/criteria/PowerConsumptionCriteriaTest.class
