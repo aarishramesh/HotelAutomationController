@@ -3,7 +3,9 @@ README
 
 Hotel Automation Controller 
 
-Hello! This is a simple Maven Java project implementing the assignment on Hotel Automation Controller
+Hello! This is a simple Maven Java project implementing the assignment on Hotel Automation Controller from Sahaj Software
+
+Major part of the implementation is dervied from https://github.com/asgs/hotel-automation-controller
 
 Few important briefings about the implementation
 
