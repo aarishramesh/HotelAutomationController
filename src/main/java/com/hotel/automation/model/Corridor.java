@@ -27,6 +27,8 @@ public abstract class Corridor {
 
 	private List<LightBulb> lightBulbs;
 
+	private List<DecorativeLamp> decorativeLamps;
+
 	private List<AirConditioner> airConditioners;
 
 	/**
@@ -36,7 +38,15 @@ public abstract class Corridor {
 		lightBulbs = new ArrayList<>();
 		lightBulbs.add(new LightBulb(
 				PowerConsumptionCriteria.LIGHTBULB_POWER_RATING, lightBulbs
-						.size(), type == CorridorType.MAIN));
+				.size(), type == CorridorType.MAIN));
+		decorativeLamps = new ArrayList<>();
+		decorativeLamps.add(new DecorativeLamp(0, PowerConsumptionCriteria.DECORATIVELIGHTS_POWER_RATING,
+				type == CorridorType.MAIN));
+		if (type == CorridorType.MAIN) {
+			decorativeLamps.add(new DecorativeLamp(1, PowerConsumptionCriteria.LIGHTBULB_POWER_RATING,
+					type == CorridorType.MAIN));
+		}
+		
 		airConditioners = new ArrayList<>();
 		airConditioners.add(new AirConditioner(
 				PowerConsumptionCriteria.AIRCONDITIONER_POWER_RATING,
@@ -46,6 +56,10 @@ public abstract class Corridor {
 
 	public void addLightBulbs(LightBulb... lightBulbs) {
 		this.lightBulbs.addAll(Arrays.asList(lightBulbs));
+	}
+
+	public void addDecorativeLamps(DecorativeLamp... decorativeLamps) {
+		this.decorativeLamps.addAll(Arrays.asList(decorativeLamps));
 	}
 
 	public void addAirConditioners(AirConditioner... airConditioners) {
@@ -67,4 +81,11 @@ public abstract class Corridor {
 		MAIN, SUB
 	}
 
+	public List<ElectronicEquipment> getAllElectronicEquipments() {
+		List<ElectronicEquipment> entireEquipments = new ArrayList<ElectronicEquipment>();
+		entireEquipments.addAll(lightBulbs);
+		entireEquipments.addAll(airConditioners);
+		entireEquipments.addAll(decorativeLamps);
+		return entireEquipments;
+	}
 }

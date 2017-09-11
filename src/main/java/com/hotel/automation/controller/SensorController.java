@@ -13,7 +13,7 @@ import lombok.Data;
  * Manages the {@link SensorInput} events and registers the {@link PowerController}
  * as an Observer to the {@link Observable} <code>Motion.
  * 
- * @author asgs
+ * @author aarishramesh
  *
  */
 @Data
@@ -39,7 +39,7 @@ public final class SensorController implements Runnable {
 	 */
 	public void raiseMotionDetectedEvent() {
 		sensorInput.addObserver(powerController);
-		sensorInput.notifyObservers(sensorInput.isLightBulbToTurnOn());
+		sensorInput.notifyObservers(sensorInput.isMotionDetected());
 	}
 
 	/**

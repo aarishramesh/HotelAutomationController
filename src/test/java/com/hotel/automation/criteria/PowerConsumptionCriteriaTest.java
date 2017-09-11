@@ -46,7 +46,7 @@ public class PowerConsumptionCriteriaTest {
 		assertTrue("Criteria is not met!", powerConsumptionCriteria.criteriaMetFor(floor));
 		floor.getSubCorridors().get(0).getAirConditioners().get(0).setSwitchedOn(true);
 		floor.getSubCorridors().get(0).getLightBulbs().get(0).setSwitchedOn(true);
-		powerConsumptionCriteria.criteriaMetFor(floor);
+		floor.getSubCorridors().get(0).getDecorativeLamps().get(0).setSwitchedOn(true);
 		assertFalse("Criteria is somehow met!", powerConsumptionCriteria.criteriaMetFor(floor));
 	}
 

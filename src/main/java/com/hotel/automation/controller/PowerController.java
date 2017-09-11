@@ -3,6 +3,8 @@
  */
 package com.hotel.automation.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -57,7 +59,7 @@ public final class PowerController implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		SensorInput motion = (SensorInput) o;
-		toggleSubCorridorsLights(motion, motion.isLightBulbToTurnOn());
+		toggleSubCorridorsLights(motion, motion.isMotionDetected());
 	}
 
 	/**
@@ -81,6 +83,7 @@ public final class PowerController implements Observer {
 			// Nothing to do. Everything is as expected.
 			System.out.println(hotel);
 			return;
+
 		}
 
 		synchronized(this) {
@@ -102,7 +105,12 @@ public final class PowerController implements Observer {
 				// previous iteration.
 				SubCorridor otherSubCorridor = subCorridorCoordination
 						.get(matchingSubCorridor);
-				powerControllerHelper.switchACOnAtSubCorridor(otherSubCorridor);
+				if (otherSubCorridor != null) {
+					powerControllerHelper.switchACOnAtSubCorridor(otherSubCorridor);
+					if(isPowerConsumptionExceededForFloor(matchingFloor)) {
+						powerControllerHelper.switchACOffAtSubCorridor(otherSubCorridor);
+					}
+				}
 			}
 			System.out.println(hotel);
 		}

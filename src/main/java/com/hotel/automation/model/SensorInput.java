@@ -25,7 +25,7 @@ public class SensorInput extends Observable {
 
 	private int subCorridorNumber;
 
-	private boolean lightBulbToTurnOn;
+	private boolean motionDetected;
 	
 	public SensorInput(int floorNumber, int subCorridorNumber) {
 		this.floorNumber = floorNumber;
@@ -36,10 +36,10 @@ public class SensorInput extends Observable {
 	 * Default constructor.
 	 */
 	public SensorInput(int floorNumber, int subCorridorNumber,
-			boolean lightBulbToTurnOn) {
+			boolean motionDetected) {
 		this.floorNumber = floorNumber;
 		this.subCorridorNumber = subCorridorNumber;
-		this.lightBulbToTurnOn = lightBulbToTurnOn;
+		this.motionDetected = motionDetected;
 	}
 	
 	@Override

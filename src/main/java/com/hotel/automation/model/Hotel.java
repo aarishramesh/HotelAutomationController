@@ -35,6 +35,7 @@ public class Hotel {
 	 * the state of each individual node.
 	 */
 	public String toString() {
+		Hotel[][] hotelArr = new Hotel[5][5];
 		StringBuilder stringBuilder = new StringBuilder();
 		getFloors().forEach(floor -> {
 			stringBuilder.append(floor.toString());

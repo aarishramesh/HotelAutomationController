@@ -22,6 +22,8 @@ public class PowerConsumptionCriteria implements Criteria {
 
 	public static final int AIRCONDITIONER_POWER_RATING = 10;
 
+	public static final int DECORATIVELIGHTS_POWER_RATING = 5;
+	
 	@Override
 	public boolean criteriaMetFor(Floor floor) {
 		return powerConsumptionForFloor(floor) <= getMaxPowerAllowedForFloor(floor);
@@ -39,7 +41,7 @@ public class PowerConsumptionCriteria implements Criteria {
 	private int getMaxPowerAllowedForFloor(Floor floor) {
 		List<MainCorridor> mainCorridors = floor.getMainCorridors();
 		List<SubCorridor> subCorridors = floor.getSubCorridors();
-		return (mainCorridors.size() * 15) + subCorridors.size() * 10;
+		return (mainCorridors.size() * 25) + subCorridors.size() * 15;
 	}
 
 	/**
@@ -53,41 +55,7 @@ public class PowerConsumptionCriteria implements Criteria {
 	 * @return The Total power consumed at this moment.
 	 */
 	private int powerConsumptionForFloor(Floor floor) {
-		List<MainCorridor> mainCorridors = floor.getMainCorridors();
-		List<SubCorridor> subCorridors = floor.getSubCorridors();
-
-		int sumOfPowersOfLightBulbsinMainCorridors = mainCorridors.stream()
-				.flatMap(mainCorridor -> mainCorridor.getLightBulbs().stream())
-				.filter(lightBulb -> lightBulb.isSwitchedOn())
-				.mapToInt(lightBulb -> lightBulb.getPowerRating()).sum();
-
-		int sumOfPowersOfAirConditionersinMainCorridors = mainCorridors
-				.stream()
-				.flatMap(
-						mainCorridor -> mainCorridor.getAirConditioners()
-								.stream())
-				.filter(airConditioner -> airConditioner.isSwitchedOn())
-				.mapToInt(airConditioner -> airConditioner.getPowerRating())
-				.sum();
-
-		int sumOfPowersOfLightBulbsinSubCorridors = subCorridors.stream()
-				.flatMap(subCorridor -> subCorridor.getLightBulbs().stream())
-				.filter(lightBulb -> lightBulb.isSwitchedOn())
-				.mapToInt(lightBulb -> lightBulb.getPowerRating()).sum();
-
-		int sumOfPowersOfAirConditionersinSubCorridors = subCorridors
-				.stream()
-				.flatMap(
-						subCorridor -> subCorridor.getAirConditioners()
-								.stream())
-				.filter(airConditioner -> airConditioner.isSwitchedOn())
-				.mapToInt(airConditioner -> airConditioner.getPowerRating())
-				.sum();
-
-		return sumOfPowersOfLightBulbsinMainCorridors
-				+ sumOfPowersOfLightBulbsinSubCorridors
-				+ sumOfPowersOfAirConditionersinMainCorridors
-				+ sumOfPowersOfAirConditionersinSubCorridors;
+		return floor.getTotalPowerConsumed();
 	}
 
 }

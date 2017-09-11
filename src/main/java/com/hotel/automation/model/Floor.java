@@ -73,4 +73,20 @@ public class Floor {
 	public String toString() {
 		return "Floor " + (floorNumber + 1);
 	}
+	
+	public int getTotalPowerConsumed() {
+		
+		int sumOfPowersOfElectronicEquipmentsinMainCorridors = mainCorridors.stream()
+				.flatMap(mainCorridor -> mainCorridor.getAllElectronicEquipments().stream())
+				.filter(electronicEquipment -> electronicEquipment.isSwitchedOn())
+				.mapToInt(electronicEquipment -> electronicEquipment.getPowerRating()).sum();
+
+		int sumOfPowersOfElectronicEquipmentsinSubCorridors = subCorridors.stream()
+				.flatMap(subCorridor -> subCorridor.getAllElectronicEquipments().stream())
+				.filter(electronicEquipment -> electronicEquipment.isSwitchedOn())
+				.mapToInt(electronicEquipment -> electronicEquipment.getPowerRating()).sum();
+
+		return sumOfPowersOfElectronicEquipmentsinMainCorridors + 
+				sumOfPowersOfElectronicEquipmentsinSubCorridors;
+	}
 }
